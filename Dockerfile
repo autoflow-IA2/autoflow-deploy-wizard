@@ -1,27 +1,31 @@
+# Multi-stage build para otimizar tamanho da imagem
 FROM node:18-alpine AS builder
 
 WORKDIR /app
 
+# Copiar package files
 COPY package*.json ./
-RUN npm ci
 
+# Instalar dependências
+RUN npm ci --only=production
+
+# Copiar código fonte
 COPY . .
+
+# Build da aplicação
 RUN npm run build
 
 # Estágio de produção
-FROM node:18-alpine
+FROM nginx:alpine
 
-WORKDIR /app
+# Copiar arquivos buildados
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Instalar serve
-RUN npm install -g serve
+# Copiar configuração do nginx
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copiar build
-COPY --from=builder /app/dist ./dist
+# Expor porta
+EXPOSE 80
 
-# IMPORTANTE: Easypanel precisa da porta 3000 por padrão
-ENV PORT=3000
-EXPOSE 3000
-
-# Servir na porta 3000
-CMD ["serve", "-s", "dist", "-l", "3000", "--no-clipboard"]
+# Comando padrão
+CMD ["nginx", "-g", "daemon off;"]
