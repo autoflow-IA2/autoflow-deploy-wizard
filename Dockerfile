@@ -1,4 +1,4 @@
-# Multi-stage build para otimizar tamanho da imagem
+# Multi-stage build
 FROM node:18-alpine AS builder
 
 WORKDIR /app
@@ -6,8 +6,8 @@ WORKDIR /app
 # Copiar package files
 COPY package*.json ./
 
-# Instalar dependências
-RUN npm ci --only=production
+# Instalar dependências (todas, para conseguir buildar)
+RUN npm ci
 
 # Copiar código fonte
 COPY . .
@@ -16,16 +16,20 @@ COPY . .
 RUN npm run build
 
 # Estágio de produção
-FROM nginx:alpine
+FROM node:18-alpine
 
-# Copiar arquivos buildados
-COPY --from=builder /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Copiar configuração do nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+# Instalar serve globalmente
+RUN npm install -g serve
 
-# Expor porta
-EXPOSE 80
+# Copiar apenas os arquivos buildados
+COPY --from=builder /app/dist ./dist
+# Se React CRA: COPY --from=builder /app/build ./build
 
-# Comando padrão
-CMD ["nginx", "-g", "daemon off;"]
+# Porta configurável via variável de ambiente
+ENV PORT=3000
+EXPOSE 3000
+
+# Comando para servir (ajuste 'dist' para 'build' se necessário)
+CMD ["serve", "-s", "dist", "-l", "3000"]
