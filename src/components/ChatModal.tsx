@@ -84,9 +84,28 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
 
       const data = await response.json();
       
+      // Parse n8n response format: [{"output": "```json\n{\"output\": \"message\"}\n```"}]
+      let agentText = 'Desculpe, não consegui processar sua mensagem.';
+      
+      try {
+        if (Array.isArray(data) && data[0]?.output) {
+          // Extract the JSON string from the output
+          const outputString = data[0].output;
+          // Remove markdown code block formatting
+          const jsonString = outputString.replace(/```json\n|\n```/g, '');
+          // Parse the JSON to get the actual message
+          const parsedOutput = JSON.parse(jsonString);
+          agentText = parsedOutput.output || agentText;
+        }
+      } catch (parseError) {
+        console.error('Error parsing n8n response:', parseError);
+        // Fallback to original parsing
+        agentText = data.response || data.message || agentText;
+      }
+      
       const agentMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: data.response || data.message || 'Desculpe, não consegui processar sua mensagem.',
+        text: agentText,
         sender: 'agent',
         timestamp: new Date()
       };
