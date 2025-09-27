@@ -85,21 +85,26 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       const data = await response.json();
       console.log('n8n response data:', data);
       
-      // Parse n8n response format: [{"output": "```json\n{\"output\": \"message\"}\n```"}]
+      // Parse n8n response format: [{"output": "message"}]
       let agentText = 'Desculpe, não consegui processar sua mensagem.';
       
       try {
         if (Array.isArray(data) && data[0]?.output) {
           console.log('Found array with output:', data[0].output);
-          // Extract the JSON string from the output
           const outputString = data[0].output;
-          // Remove markdown code block formatting
-          const jsonString = outputString.replace(/```json\n|\n```/g, '');
-          console.log('Cleaned JSON string:', jsonString);
-          // Parse the JSON to get the actual message
-          const parsedOutput = JSON.parse(jsonString);
-          console.log('Parsed output:', parsedOutput);
-          agentText = parsedOutput.output || agentText;
+          
+          // Check if it's a direct string response
+          if (typeof outputString === 'string' && !outputString.includes('```json')) {
+            console.log('Direct output string:', outputString);
+            agentText = outputString;
+          } else {
+            // Handle the complex JSON format (fallback)
+            const jsonString = outputString.replace(/```json\n|\n```/g, '');
+            console.log('Cleaned JSON string:', jsonString);
+            const parsedOutput = JSON.parse(jsonString);
+            console.log('Parsed output:', parsedOutput);
+            agentText = parsedOutput.output || agentText;
+          }
         } else if (data.reply) {
           // Handle direct reply format
           agentText = data.reply;
