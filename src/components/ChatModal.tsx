@@ -64,7 +64,7 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
 
     try {
       // Call n8n webhook
-      const response = await fetch('https://n8n-n8n.hhqray.easypanel.host/webhook/site', {
+      const response = await fetch('https://n8n-n8n.hhqray.easypanel.host/webhook/portifolio', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
