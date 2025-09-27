@@ -79,11 +79,21 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       });
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server error:', response.status, errorText);
         throw new Error('Erro na comunicação com o servidor');
       }
 
-      const data = await response.json();
-      console.log('n8n response data:', data);
+      let data;
+      try {
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+        data = JSON.parse(responseText);
+        console.log('n8n response data:', data);
+      } catch (jsonError) {
+        console.error('JSON parsing error:', jsonError);
+        throw new Error('Resposta inválida do servidor');
+      }
       
       // Parse n8n response format: [{"output": "message"}]
       let agentText = 'Desculpe, não consegui processar sua mensagem.';
