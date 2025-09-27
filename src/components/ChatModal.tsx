@@ -83,24 +83,37 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       }
 
       const data = await response.json();
+      console.log('n8n response data:', data);
       
       // Parse n8n response format: [{"output": "```json\n{\"output\": \"message\"}\n```"}]
       let agentText = 'Desculpe, não consegui processar sua mensagem.';
       
       try {
         if (Array.isArray(data) && data[0]?.output) {
+          console.log('Found array with output:', data[0].output);
           // Extract the JSON string from the output
           const outputString = data[0].output;
           // Remove markdown code block formatting
           const jsonString = outputString.replace(/```json\n|\n```/g, '');
+          console.log('Cleaned JSON string:', jsonString);
           // Parse the JSON to get the actual message
           const parsedOutput = JSON.parse(jsonString);
+          console.log('Parsed output:', parsedOutput);
           agentText = parsedOutput.output || agentText;
+        } else if (data.reply) {
+          // Handle direct reply format
+          agentText = data.reply;
+        } else if (data.response) {
+          // Handle response format
+          agentText = data.response;
+        } else if (data.message) {
+          // Handle message format
+          agentText = data.message;
         }
       } catch (parseError) {
-        console.error('Error parsing n8n response:', parseError);
+        console.error('Error parsing n8n response:', parseError, 'Data:', data);
         // Fallback to original parsing
-        agentText = data.response || data.message || agentText;
+        agentText = data.reply || data.response || data.message || agentText;
       }
       
       const agentMessage: Message = {
