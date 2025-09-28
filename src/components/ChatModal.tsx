@@ -123,7 +123,12 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
           console.log('Found array with text objects:', data);
           // Create separate messages for each text piece
           agentMessages = data.map(item => item.text.trim()).filter(text => text.length > 0);
-        } 
+        }
+        // Check if response is a single object with "text" property
+        else if (data && data.text && typeof data.text === 'string') {
+          console.log('Found single object with text property:', data);
+          agentMessages = [data.text.trim()];
+        }
         // Check if response has output property (legacy format)
         else if (Array.isArray(data) && data[0]?.output) {
           console.log('Found array with output:', data[0].output);
@@ -154,7 +159,7 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       } catch (parseError) {
         console.error('Error parsing n8n response:', parseError, 'Data:', data);
         // Fallback to original parsing
-        agentMessages = [data.reply || data.response || data.message || 'Desculpe, não consegui processar sua mensagem.'];
+        agentMessages = [data.reply || data.response || data.message || data.text || 'Desculpe, não consegui processar sua mensagem.'];
       }
       
       // Add each message separately with a small delay for streaming effect
