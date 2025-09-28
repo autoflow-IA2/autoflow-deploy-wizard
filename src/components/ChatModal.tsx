@@ -96,14 +96,14 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       }
       
       // Parse n8n response format
-      let agentText = 'Desculpe, não consegui processar sua mensagem.';
+      let agentMessages: string[] = [];
       
       try {
         // Check if response is an array of objects with "text" property
         if (Array.isArray(data) && data.length > 0 && data[0].text) {
           console.log('Found array with text objects:', data);
-          // Concatenate all text pieces
-          agentText = data.map(item => item.text).join('');
+          // Create separate messages for each text piece
+          agentMessages = data.map(item => item.text.trim()).filter(text => text.length > 0);
         } 
         // Check if response has output property (legacy format)
         else if (Array.isArray(data) && data[0]?.output) {
@@ -113,39 +113,43 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
           // Check if it's a direct string response
           if (typeof outputString === 'string' && !outputString.includes('```json')) {
             console.log('Direct output string:', outputString);
-            agentText = outputString;
+            agentMessages = [outputString];
           } else {
             // Handle the complex JSON format (fallback)
             const jsonString = outputString.replace(/```json\n|\n```/g, '');
             console.log('Cleaned JSON string:', jsonString);
             const parsedOutput = JSON.parse(jsonString);
             console.log('Parsed output:', parsedOutput);
-            agentText = parsedOutput.output || agentText;
+            agentMessages = [parsedOutput.output || 'Desculpe, não consegui processar sua mensagem.'];
           }
         } else if (data.reply) {
           // Handle direct reply format
-          agentText = data.reply;
+          agentMessages = [data.reply];
         } else if (data.response) {
           // Handle response format
-          agentText = data.response;
+          agentMessages = [data.response];
         } else if (data.message) {
           // Handle message format
-          agentText = data.message;
+          agentMessages = [data.message];
         }
       } catch (parseError) {
         console.error('Error parsing n8n response:', parseError, 'Data:', data);
         // Fallback to original parsing
-        agentText = data.reply || data.response || data.message || agentText;
+        agentMessages = [data.reply || data.response || data.message || 'Desculpe, não consegui processar sua mensagem.'];
       }
       
-      const agentMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: agentText,
-        sender: 'agent',
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, agentMessage]);
+      // Add each message separately with a small delay for streaming effect
+      agentMessages.forEach((text, index) => {
+        setTimeout(() => {
+          const agentMessage: Message = {
+            id: `${Date.now()}_${index}`,
+            text: text,
+            sender: 'agent',
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, agentMessage]);
+        }, index * 500); // 500ms delay between messages
+      });
 
     } catch (error) {
       console.error('Error sending message:', error);
