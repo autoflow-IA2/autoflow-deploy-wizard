@@ -98,10 +98,19 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       try {
         const responseText = await response.text();
         console.log('Raw response:', responseText);
+        
+        // Check if response is empty
+        if (!responseText || responseText.trim() === '') {
+          throw new Error('Resposta vazia do servidor');
+        }
+        
         data = JSON.parse(responseText);
         console.log('n8n response data:', data);
       } catch (jsonError) {
         console.error('JSON parsing error:', jsonError);
+        if (jsonError.message === 'Resposta vazia do servidor') {
+          throw new Error('O servidor retornou uma resposta vazia. Tente novamente.');
+        }
         throw new Error('Resposta inválida do servidor');
       }
       
