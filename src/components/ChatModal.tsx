@@ -95,11 +95,18 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
         throw new Error('Resposta inválida do servidor');
       }
       
-      // Parse n8n response format: [{"output": "message"}]
+      // Parse n8n response format
       let agentText = 'Desculpe, não consegui processar sua mensagem.';
       
       try {
-        if (Array.isArray(data) && data[0]?.output) {
+        // Check if response is an array of objects with "text" property
+        if (Array.isArray(data) && data.length > 0 && data[0].text) {
+          console.log('Found array with text objects:', data);
+          // Concatenate all text pieces
+          agentText = data.map(item => item.text).join('');
+        } 
+        // Check if response has output property (legacy format)
+        else if (Array.isArray(data) && data[0]?.output) {
           console.log('Found array with output:', data[0].output);
           const outputString = data[0].output;
           
