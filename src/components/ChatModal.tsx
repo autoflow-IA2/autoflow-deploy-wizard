@@ -81,7 +81,17 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Server error:', response.status, errorText);
-        throw new Error('Erro na comunicação com o servidor');
+        
+        // Handle specific error codes
+        if (response.status === 502) {
+          throw new Error('O serviço do assistente está temporariamente indisponível. Tente novamente em alguns minutos.');
+        } else if (response.status === 500) {
+          throw new Error('Erro interno do servidor. Tente novamente em alguns instantes.');
+        } else if (response.status === 429) {
+          throw new Error('Muitas solicitações. Aguarde um momento antes de tentar novamente.');
+        } else {
+          throw new Error('Erro na comunicação com o servidor');
+        }
       }
 
       let data;
