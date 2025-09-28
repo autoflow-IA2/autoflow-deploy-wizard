@@ -119,10 +119,11 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       
       try {
         // Check if response is an array of objects with "text" property
-        if (Array.isArray(data) && data.length > 0 && data[0].text) {
+        if (Array.isArray(data) && data.length > 0 && data[0] && data[0].text) {
           console.log('Found array with text objects:', data);
           // Create separate messages for each text piece
           agentMessages = data.map(item => item.text.trim()).filter(text => text.length > 0);
+          console.log('Mapped agent messages:', agentMessages);
         }
         // Check if response is a single object with "text" property
         else if (data && data.text && typeof data.text === 'string') {
