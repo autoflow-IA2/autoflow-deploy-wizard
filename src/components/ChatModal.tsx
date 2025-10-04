@@ -118,17 +118,21 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
       let agentMessages: string[] = [];
       
       try {
+        // Check if response is n8n format with nested json.output
+        if (Array.isArray(data) && data.length > 0 && data[0]?.json?.output) {
+          console.log('Found n8n array with json.output:', data);
+          agentMessages = data.map(item => item.json.output.trim()).filter(text => text.length > 0);
+          console.log('Mapped agent messages:', agentMessages);
+        }
         // Check if response is an array of objects with "output" property
-        if (Array.isArray(data) && data.length > 0 && data[0] && data[0].output) {
+        else if (Array.isArray(data) && data.length > 0 && data[0] && data[0].output) {
           console.log('Found array with output objects:', data);
-          // Create separate messages for each output piece
           agentMessages = data.map(item => item.output.trim()).filter(text => text.length > 0);
           console.log('Mapped agent messages:', agentMessages);
         }
         // Check if response is an array of objects with "text" property
         else if (Array.isArray(data) && data.length > 0 && data[0] && data[0].text) {
           console.log('Found array with text objects:', data);
-          // Create separate messages for each text piece
           agentMessages = data.map(item => item.text.trim()).filter(text => text.length > 0);
           console.log('Mapped agent messages:', agentMessages);
         }
