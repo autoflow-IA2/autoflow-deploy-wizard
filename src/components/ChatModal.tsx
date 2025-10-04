@@ -25,8 +25,16 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [sessionId, setSessionId] = useState<string>("");
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  // Generate unique session ID when modal opens
+  useEffect(() => {
+    if (isOpen && !sessionId) {
+      setSessionId(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
+    }
+  }, [isOpen, sessionId]);
 
   // Auto scroll to bottom when new messages arrive
   useEffect(() => {
@@ -74,7 +82,7 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
           agentType: agentType,
           agentName: agentName,
           timestamp: new Date().toISOString(),
-          sessionId: `session_${Date.now()}`
+          sessionId: sessionId
         })
       });
 
@@ -217,6 +225,7 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
   const handleClose = () => {
     setMessages([]);
     setInputValue("");
+    setSessionId("");
     onClose();
   };
 
