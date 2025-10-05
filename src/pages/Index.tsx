@@ -82,7 +82,7 @@ const Index = () => {
       <AnimatedBackground />
       <Header />
       
-      <main className="pt-32 pb-16 px-8">
+      <main className="pb-16 px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-16 space-y-4">

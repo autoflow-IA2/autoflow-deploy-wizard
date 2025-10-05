@@ -2,9 +2,9 @@ import logo from "@/assets/logo.png";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 w-full px-6 py-4 bg-background/80 backdrop-blur-md z-50 border-b border-border">
+    <header className="w-full px-6 py-4 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-start">
           <img 
             src={logo} 
             alt="AutoFlow Logo" 

@@ -3,7 +3,7 @@ import { ArrowDown, Sparkles } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="pt-32 pb-20 px-6 text-center relative">
+    <section className="pt-8 pb-20 px-6 text-center relative">
       <div className="max-w-5xl mx-auto">
         <div className="animate-slide-in space-y-6">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
