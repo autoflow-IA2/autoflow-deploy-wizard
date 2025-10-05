@@ -8,7 +8,7 @@ const Header = () => {
           <img 
             src={logo} 
             alt="AutoFlow Logo" 
-            className="h-[100px] w-[50px] object-cover"
+            className="h-[150px] w-[100px] object-cover"
           />
         </div>
       </div>
