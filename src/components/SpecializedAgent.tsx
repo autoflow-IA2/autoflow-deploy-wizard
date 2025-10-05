@@ -21,26 +21,21 @@ const SpecializedAgent = ({
   onStartChat 
 }: SpecializedAgentProps) => {
   return (
-    <Card className="relative bg-card border-0 overflow-hidden group hover:scale-105 transition-all duration-300">
-      {/* Gradient Border */}
-      <div className={`absolute inset-0 ${borderGradient} p-[2px] rounded-lg`}>
-        <div className="bg-card rounded-[6px] h-full w-full" />
-      </div>
-      
+    <Card className="relative bg-card border border-border overflow-hidden group hover:shadow-elevated hover:-translate-y-1 transition-all duration-300">
       {/* Content */}
       <div className="relative z-10 p-6">
         {/* Online Badge */}
         <div className="flex justify-end mb-4">
-          <Badge className="bg-success/20 text-success border-success/30 text-xs">
-            <div className="w-2 h-2 bg-success rounded-full mr-1 animate-pulse" />
+          <Badge className="bg-primary/10 text-primary border-primary/20 text-xs font-medium">
+            <div className="w-2 h-2 bg-primary rounded-full mr-1.5 animate-pulse" />
             Online
           </Badge>
         </div>
         
         {/* Icon */}
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 rounded-xl bg-secondary/20 flex items-center justify-center">
-            <Icon className={`w-8 h-8 ${iconColor}`} />
+          <div className="w-16 h-16 rounded-xl bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-300">
+            <Icon className="w-8 h-8 text-primary" />
           </div>
         </div>
         
@@ -57,7 +52,7 @@ const SpecializedAgent = ({
         {/* Action Button */}
         <Button 
           onClick={onStartChat}
-          className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+          className="w-full bg-primary hover:bg-primary/90 shadow-glow hover:shadow-elevated transition-all duration-300"
           size="lg"
         >
           🔮 Iniciar Conversa

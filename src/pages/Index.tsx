@@ -85,15 +85,12 @@ const Index = () => {
       <main className="pt-32 pb-16 px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-hero">
+          <div className="text-center mb-16 space-y-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
               Agentes IA Especializados
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-4">
-              6 agentes de inteligência artificial prontos para revolucionar seu negócio
-            </p>
-            <p className="text-sm text-muted-foreground">
-              com automação inteligente
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+              6 agentes de inteligência artificial prontos para revolucionar seu negócio com automação inteligente
             </p>
           </div>
 
@@ -118,8 +115,8 @@ const Index = () => {
           </div>
           
           {/* Footer */}
-          <div className="text-center mt-16">
-            <p className="text-xs text-muted-foreground">
+          <div className="text-center mt-20 pt-8 border-t border-border">
+            <p className="text-sm text-muted-foreground">
               © 2024 AutoFlow - Transformando negócios com IA
             </p>
           </div>

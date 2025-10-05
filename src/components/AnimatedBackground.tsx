@@ -4,7 +4,7 @@ const AnimatedBackground = () => {
   useEffect(() => {
     const createParticle = () => {
       const particle = document.createElement('div');
-      particle.className = 'particle fixed pointer-events-none rounded-full bg-accent/30 animate-float';
+      particle.className = 'particle fixed pointer-events-none rounded-full bg-primary/10 animate-float';
       particle.style.left = Math.random() * 100 + 'vw';
       particle.style.width = Math.random() * 4 + 2 + 'px';
       particle.style.height = particle.style.width;
@@ -27,7 +27,7 @@ const AnimatedBackground = () => {
 
   return (
     <div className="fixed inset-0 w-full h-full -z-10">
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-card animate-gradient" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/30" />
     </div>
   );
 };

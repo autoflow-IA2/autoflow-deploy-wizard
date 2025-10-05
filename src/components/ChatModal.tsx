@@ -232,18 +232,18 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-2xl h-[600px] flex flex-col p-0">
-        <DialogHeader className="p-6 pb-4 border-b border-border/50">
+        <DialogHeader className="p-6 pb-4 border-b border-border">
           <DialogTitle className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center">
-              <Bot className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+              <Bot className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">{agentName}</h3>
+              <h3 className="text-lg font-semibold text-foreground">{agentName}</h3>
               <p className="text-sm text-muted-foreground">Assistente IA Especializado</p>
             </div>
             <div className="ml-auto">
-              <Badge className="bg-success/20 text-success border-success/30 text-xs">
-                <div className="w-2 h-2 bg-success rounded-full mr-1 animate-pulse" />
+              <Badge className="bg-primary/10 text-primary border-primary/20 text-xs font-medium">
+                <div className="w-2 h-2 bg-primary rounded-full mr-1.5 animate-pulse" />
                 Online
               </Badge>
             </div>
@@ -258,8 +258,8 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
                 className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {message.sender === 'agent' && (
-                  <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center shrink-0">
-                    <Bot className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+                    <Bot className="w-4 h-4 text-primary-foreground" />
                   </div>
                 )}
                 
@@ -289,8 +289,8 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
             
             {isLoading && (
               <div className="flex gap-3 justify-start">
-                <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center shrink-0">
-                  <Bot className="w-4 h-4 text-white" />
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+                  <Bot className="w-4 h-4 text-primary-foreground" />
                 </div>
                 <div className="bg-secondary text-secondary-foreground p-3 rounded-2xl">
                   <div className="flex items-center gap-2">
@@ -303,7 +303,7 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
           </div>
         </ScrollArea>
 
-        <div className="p-6 pt-4 border-t border-border/50">
+        <div className="p-6 pt-4 border-t border-border">
           <form onSubmit={handleSubmit} className="flex gap-2">
             <Input
               value={inputValue}
@@ -316,7 +316,7 @@ const ChatModal = ({ isOpen, onClose, agentName, agentType }: ChatModalProps) =>
             <Button 
               type="submit" 
               disabled={!inputValue.trim() || isLoading}
-              className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
+              className="bg-primary hover:bg-primary/90 shadow-glow transition-all duration-300"
             >
               <Send className="w-4 h-4" />
             </Button>
