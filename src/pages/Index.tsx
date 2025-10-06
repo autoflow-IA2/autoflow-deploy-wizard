@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
 import SpecializedAgent from "@/components/SpecializedAgent";
 import ChatModal from "@/components/ChatModal";
 import { 
@@ -82,16 +83,15 @@ const Index = () => {
       <AnimatedBackground />
       <Header />
       
+      <HeroSection />
+      
       <main className="pb-16 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-20 space-y-6 pt-12">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-              Agentes IA Especializados
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              6 agentes de inteligência artificial prontos para revolucionar seu negócio com automação inteligente
-            </p>
+          {/* Agents Section */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Nossos Agentes Inteligentes
+            </h2>
           </div>
 
           {/* Agents Grid */}
