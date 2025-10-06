@@ -60,6 +60,7 @@
     --shadow-glow: 0 8px 32px hsl(262 83% 58% / 0.15);
     --shadow-card: 0 2px 8px hsl(240 10% 10% / 0.08);
     --shadow-elevated: 0 4px 16px hsl(240 10% 10% / 0.1);
+    --shadow-neon-purple: 0 0 20px hsl(262 83% 58% / 0.6), 0 0 40px hsl(262 83% 58% / 0.4), 0 0 60px hsl(262 83% 58% / 0.2);
 
     --sidebar-background: 265 45% 12%;
     --sidebar-foreground: 280 40% 95%;
@@ -203,6 +204,10 @@
   
   .shadow-elevated {
     box-shadow: var(--shadow-elevated);
+  }
+  
+  .shadow-neon-purple {
+    box-shadow: var(--shadow-neon-purple);
   }
   
   /* Backdrop Effects */

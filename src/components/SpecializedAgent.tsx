@@ -21,7 +21,7 @@ const SpecializedAgent = ({
   onStartChat 
 }: SpecializedAgentProps) => {
   return (
-    <Card className="relative bg-card border border-border overflow-hidden group hover:shadow-elevated hover:-translate-y-1 transition-all duration-300">
+    <Card className="relative bg-card border border-border overflow-hidden group hover:shadow-neon-purple hover:-translate-y-1 transition-all duration-300">
       {/* Content */}
       <div className="relative z-10 p-6">
         {/* Online Badge */}
