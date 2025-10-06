@@ -1,20 +1,14 @@
 import logo from "@/assets/logo.png";
-import headerText from "@/assets/header-text.png";
 
 const Header = () => {
   return (
     <header className="w-full px-6 py-4 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-start gap-6">
+        <div className="flex items-center justify-start">
           <img 
             src={logo} 
             alt="AutoFlow Logo" 
-            className="h-[300px] w-[200px] object-cover"
-          />
-          <img 
-            src={headerText} 
-            alt="Agentes IA Especializados" 
-            className="h-auto w-auto max-h-[120px]"
+            className="h-[120px] w-[80px] object-contain"
           />
         </div>
       </div>

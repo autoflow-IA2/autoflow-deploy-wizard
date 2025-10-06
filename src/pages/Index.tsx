@@ -82,24 +82,24 @@ const Index = () => {
       <AnimatedBackground />
       <Header />
       
-      <main className="pb-16 px-8">
+      <main className="pb-16 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header Section */}
-          <div className="text-center mb-16 space-y-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+          <div className="text-center mb-20 space-y-6 pt-12">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
               Agentes IA Especializados
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               6 agentes de inteligência artificial prontos para revolucionar seu negócio com automação inteligente
             </p>
           </div>
 
           {/* Agents Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {agents.map((agent, index) => (
               <div 
                 key={agent.id} 
-                className="animate-bounce-in" 
+                className="animate-fade-in" 
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <SpecializedAgent
@@ -115,7 +115,7 @@ const Index = () => {
           </div>
           
           {/* Footer */}
-          <div className="text-center mt-20 pt-8 border-t border-border">
+          <div className="text-center mt-24 pt-12 border-t border-border/50">
             <p className="text-sm text-muted-foreground">
               © 2024 AutoFlow - Transformando negócios com IA
             </p>
