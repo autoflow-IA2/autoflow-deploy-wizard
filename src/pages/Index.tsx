@@ -9,8 +9,8 @@ import {
   Sparkles, 
   Dumbbell, 
   Heart, 
-  Home, 
-  DollarSign 
+  Bot, 
+  Scale 
 } from "lucide-react";
 
 const agents = [
@@ -47,18 +47,18 @@ const agents = [
     iconColor: 'text-pink-400'
   },
   {
-    id: 'imobiliaria',
-    title: 'Imobiliária',
-    description: 'Corretor virtual especialista em compra, venda, aluguel e avaliação de propriedades.',
-    icon: Home,
+    id: 'outros',
+    title: 'Outros',
+    description: 'Assistente virtual versátil pronto para ajudar com diversas tarefas e responder suas perguntas.',
+    icon: Bot,
     borderGradient: 'bg-gradient-to-r from-orange-500 to-red-500',
     iconColor: 'text-yellow-400'
   },
   {
-    id: 'financeiro',
-    title: 'Financeiro',
-    description: 'Consultor financeiro para planejamento financeiro e orientações sobre economia pessoal.',
-    icon: DollarSign,
+    id: 'advogado',
+    title: 'Advogado',
+    description: 'Especialista em consultoria jurídica, orientações legais e suporte em questões jurídicas diversas.',
+    icon: Scale,
     borderGradient: 'bg-gradient-to-r from-yellow-500 to-amber-500',
     iconColor: 'text-yellow-400'
   }
