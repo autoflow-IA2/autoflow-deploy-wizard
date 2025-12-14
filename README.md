@@ -1,73 +1,60 @@
-# Welcome to your Lovable project
+# 🤖 Portfólio Inteligente com Agentes de IA
 
-## Project info
+> Uma interface moderna de chat construída com Lovable, alimentada por orquestração de IA via n8n e memória de longo prazo com Supabase.
 
-**URL**: https://lovable.dev/projects/b57fd77c-3162-4645-a185-d4dcfb259778
+[![Ver Demo Online](https://img.shields.io/badge/🟢_Demo_Online-Acessar_Projeto-2ea44f?style=for-the-badge)](https://portifolio.autoflowia2.com.br/)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+![Status do Projeto](https://img.shields.io/badge/Status-Online-success)
+![n8n](https://img.shields.io/badge/n8n-Backend_Logic-ff6b6b)
+![Supabase](https://img.shields.io/badge/Supabase-Database-3ecf8e)
+![React](https://img.shields.io/badge/Frontend-Lovable%2FReact-blue)
 
-**Use Lovable**
+## 📸 Demonstração
+...
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b57fd77c-3162-4645-a185-d4dcfb259778) and start prompting.
+## 💡 Sobre o Projeto
 
-Changes made via Lovable will be committed automatically to this repo.
+Este projeto demonstra a criação de Agentes de IA capazes de interagir em linguagem natural. Diferente de chats comuns, este sistema possui uma arquitetura desacoplada onde a inteligência e a lógica de negócios residem em workflows de automação.
 
-**Use your preferred IDE**
+**O diferencial:** O frontend foi acelerado usando Lovable.dev, permitindo foco total na lógica complexa do backend (n8n) e na persistência de dados (Supabase).
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Arquitetura e Tecnologias
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+O fluxo de dados funciona da seguinte maneira:
 
-Follow these steps:
+1.  **Frontend (Lovable/React):** Captura a intenção do usuário e envia via API.
+2.  **Orquestração (n8n):** Recebe a requisição, processa via LangChain/OpenAI e decide a ação.
+3.  **Memória (Supabase):** Armazena o histórico da conversa e dados dos usuários.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Stack Completa:
+* **Frontend:** React, Vite, TypeScript, Tailwind CSS, shadcn-ui (Gerado via Lovable).
+* **Backend / API:** n8n (Webhooks e Workflow de IA).
+* **Database:** Supabase (PostgreSQL).
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🚀 Funcionalidades dos Agentes
 
-# Step 3: Install the necessary dependencies.
-npm i
+* [ ] **Memória de Conversa:** O agente lembra o que foi dito anteriormente (via Vetorização/Supabase).
+* [ ] **Execução de Ferramentas:** O agente pode consultar APIs externas ou realizar cálculos.
+* [ ] **Interface Responsiva:** Funciona perfeitamente em Mobile e Desktop.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 📦 Como Rodar Localmente
+
+### Pré-requisitos
+* Node.js & npm instalados.
+* Acesso à instância do n8n (para processar as requisições).
+
+```bash
+# 1. Clone o repositório
+git clone <SEU_URL_DO_GITHUB>
+
+# 2. Instale as dependências
+npm install
+
+# 3. Configure as Variáveis de Ambiente (.env)
+# Você precisará da URL do seu Webhook do n8n
+echo "VITE_N8N_WEBHOOK_URL=sua_url_aqui" > .env
+
+# 4. Rode o servidor de desenvolvimento
 npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/b57fd77c-3162-4645-a185-d4dcfb259778) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
